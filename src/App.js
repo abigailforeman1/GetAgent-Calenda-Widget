@@ -23,6 +23,7 @@ class App extends React.Component {
     this.setState({ currentDate, daysInMonth, daysArray })
   }
 
+  // looping through days in current displayed month to create an array of all days
   createDaysArray (daysInMonth) {
     const daysArray = []
     for (let i = 1; i <= daysInMonth; i++) {
@@ -31,6 +32,7 @@ class App extends React.Component {
     this.setState({ daysArray })
   }
 
+  // uses prop sent to function to determine whether adding or subtracting a month, sets new month and days in month to state
   handleClickArrow = e => {
     console.log(e.target.value)
     const newMonth =
@@ -41,20 +43,6 @@ class App extends React.Component {
     this.createDaysArray(daysInMonth)
     this.setState({ currentDate: newMonth, daysInMonth: daysInMonth })
   }
-
-  // handleClickBack = () => {
-  //   const newMonth = this.state.currentDate.subtract(1, 'month')
-  //   const daysInMonth = parseInt(moment(newMonth).daysInMonth())
-  //   this.createDaysArray(daysInMonth)
-  //   this.setState({ currentDate: newMonth, daysInMonth: daysInMonth })
-  // }
-
-  // handleClickForward = () => {
-  //   const newMonth = this.state.currentDate.add(1, 'month')
-  //   const daysInMonth = parseInt(moment(newMonth).daysInMonth())
-  //   this.createDaysArray(daysInMonth)
-  //   this.setState({ currentDate: newMonth, daysInMonth: daysInMonth })
-  // }
 
   render () {
     if (!this.state.currentDate) return null
