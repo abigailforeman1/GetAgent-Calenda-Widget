@@ -44,12 +44,91 @@ class App extends React.Component {
     this.setState({ currentDate: newMonth, daysInMonth: daysInMonth })
   }
 
+  // creating correct date format from the event target when clicking on a cell
+  selectDay = e => {
+    const number = parseInt(e.target.innerHTML)
+    const event = e.target.innerHTML
+    const formatted = `${event}/${moment(this.state.currentDate).format(
+      'MM/YYYY'
+    )}`
+    this.setState({ selectedDay: formatted, selectedElement: number })
+  }
+
   render () {
     if (!this.state.currentDate) return null
 
     const displayDate = this.state.currentDate._d.toString()
     const slicedYear = displayDate.slice(10, 15)
     const slicedMonth = displayDate.slice(3, 8)
+
+    // 
+    const daysIntoMonth = parseInt(
+      moment(this.state.currentDate)
+        .startOf('month')
+        .format('d')
+    )
+
+    const blankCells = []
+    for (let i = 0; i < daysIntoMonth; i++) {
+      blankCells.push(
+        <td key={i} className='empty'>
+          {''}
+        </td>
+      )
+    }
+
+    const dayCells = []
+    for (let i = 1; i <= this.state.daysInMonth; i++) {
+      if (i === parseInt(moment().format('D'))) {
+        dayCells.push(
+          <td
+            key={i}
+            className='cell-with-day test-border today-marker'
+            onClick={this.selectDay}
+          >
+            {i}
+          </td>
+        )
+      }
+      dayCells.push(
+        <td
+          key={i}
+          className={
+            this.state.selectedElement === i
+              ? 'selected-day cell-with-day test-border'
+              : 'cell-with-day test-border'
+          }
+          onClick={this.selectDay}
+        >
+          {i}
+        </td>
+      )
+    }
+
+    const blanksAndCells = [...blankCells, ...dayCells]
+    const rows = []
+    let cells = []
+
+    blanksAndCells.forEach((row, i) => {
+      if (i % 7 !== 0) {
+        cells.push(row)
+      } else {
+        rows.push(cells)
+        cells = []
+        cells.push(row)
+      }
+      if (i === blanksAndCells.length - 1) {
+        rows.push(cells)
+      }
+    })
+
+    const dayCells2 = rows.map(row => {
+      return (
+        <tr key={Math.random()} className='day-cells'>
+          {row}
+        </tr>
+      )
+    })
 
     return (
       <>
@@ -89,6 +168,27 @@ class App extends React.Component {
                 </button>
               </div>
             </div>
+
+            {/* <div className='weeks-wrapper row'>
+              {moment.weekdaysShort(true).map(day => (
+                <div key={day} className='column'>
+                  <h1 className='weeks'>{day}</h1>
+                </div>
+              ))}
+            </div> */}
+
+            <table className='weeks-wrapper'>
+              <tbody>
+                <tr>
+                  {moment.weekdaysShort(true).map(day => (
+                    <th key={day} className='weeks test-border'>
+                      {day}
+                    </th>
+                  ))}
+                </tr>
+              </tbody>
+              <tbody>{dayCells2}</tbody>
+            </table>
           </div>
         </div>
       </>
