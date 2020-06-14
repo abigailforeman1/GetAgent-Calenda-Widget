@@ -83,7 +83,7 @@ class App extends React.Component {
         dayCells.push(
           <td
             key={i}
-            className='cell-with-day test-border today-marker'
+            className='cell-with-day today-marker'
             onClick={this.selectDay}
           >
             {i}
@@ -95,8 +95,8 @@ class App extends React.Component {
           key={i}
           className={
             this.state.selectedElement === i
-              ? 'selected-day cell-with-day test-border'
-              : 'cell-with-day test-border'
+              ? 'selected-day cell-with-day'
+              : 'cell-with-day'
           }
           onClick={this.selectDay}
         >
@@ -133,9 +133,11 @@ class App extends React.Component {
     return (
       <>
         <div className='main-wrapper'>
-          <div className='outer-border '>
+          <div className='outer-border'>
+
             <div className='row'>
               <div className='current-year-month-wrapper'>
+
                 <button
                   className='left-side-arrow column back-arrow'
                   onClick={this.handleClickArrow}
@@ -154,6 +156,7 @@ class App extends React.Component {
                     {slicedMonth} {slicedYear}
                   </h1>
                 </div>
+
                 <button
                   className='right-side-arrow column'
                   onClick={this.handleClickArrow}
@@ -179,9 +182,9 @@ class App extends React.Component {
 
             <table className='weeks-wrapper'>
               <tbody>
-                <tr>
+                <tr className='weeks-header-wrapper'>
                   {moment.weekdaysShort(true).map(day => (
-                    <th key={day} className='weeks test-border'>
+                    <th key={day} className='weeks'>
                       {day}
                     </th>
                   ))}
