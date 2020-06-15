@@ -137,18 +137,23 @@ class App extends React.Component {
           <div className='outer-border'>
             <div className='row'>
               <div className='current-year-month-wrapper'>
-                <button
-                  className='left-side-arrow column back-arrow'
-                  onClick={this.handleClickArrow}
-                  value='subtract'
-                >
-                  <img
-                    className='back-arrow'
+                <div className='button-wrapper column first'>
+                  <input
+                    type='image'
                     src={previous}
                     alt='back arrow'
+                    className='left-side-arrow back-arrow'
+                    onClick={this.handleClickArrow}
                     value='subtract'
                   />
-                </button>
+
+                  {/* <img
+                      className='back-arrow'
+                      src={previous}
+                      alt='back arrow'
+                      value='subtract'
+                    /> */}
+                </div>
 
                 <div className='column2'>
                   <h1 className='current-year-month'>
@@ -156,18 +161,22 @@ class App extends React.Component {
                   </h1>
                 </div>
 
-                <button
-                  className='right-side-arrow column'
-                  onClick={this.handleClickArrow}
-                  value='add'
-                >
-                  <img
-                    className='next-arrow'
+                <div className='button-wrapper column second'>
+                  <input
+                    type='image'
                     src={next}
                     alt='next arrow'
+                    className='right-side-arrow next-arrow'
+                    onClick={this.handleClickArrow}
                     value='add'
                   />
-                </button>
+                  {/* <img
+                      className='next-arrow'
+                      src={next}
+                      alt='next arrow'
+                      value='add'
+                    /> */}
+                </div>
               </div>
             </div>
 
