@@ -3,6 +3,7 @@
 $darkish-blue: rgb(0, 53, 124);
 $bright-blue: rgb(0, 108, 250);
 $very-light-blue: rgb(215, 232, 254);
+$powder-blue: #bfdafd;
 
 * {
   box-sizing: border-box;
@@ -12,20 +13,87 @@ $very-light-blue: rgb(215, 232, 254);
 
 body {
   font-family: 'Roboto', sans-serif;
-}
-
-input {
-  outline: none;
+  color: $darkish-blue;
 }
 
 button {
   background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+.main-input-wrapper {
+  display: flex;
+  border: $darkish-blue 2px solid;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.text-wrapper {
+  margin: 10px 20px 10px 0;
+}
+
+.main-header {
+  font-size: 20px;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.subheader {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.placeholder {
+  color: $darkish-blue;
+  opacity: 0.5;
+  font-size: 12px;
+  padding: 8px 60px 8px 10px;
+  align-self: center;
+
+}
+
+.up-down-arrow {
+  padding: 12px 15px;
+  display: flex;
+  align-self: center;
+}
+
+.up-down-arrow-wrapper {
+  border-left: $darkish-blue 2px solid;
+  background-color: $powder-blue;
+}
+
+.select-submit-wrapper {
+  display: flex;
+  align-self: center;
+  margin: 20px 60px 20px 20px;
+}
+
+.selection-box  {
+  display: flex;
+  border: $darkish-blue 2px solid;
+  border-radius: 4px;
+  margin: 6px;
+
+}
+
+.submit-button {
+  background-color: $bright-blue;
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+  padding: 10px 20px;
+  margin: 6px;
 }
 
 .row {
@@ -34,7 +102,6 @@ button {
   flex-wrap: wrap;
   width: 100%;
   border-bottom: 1px solid $very-light-blue;
-  // border: red 1px solid;
 }
 
 .column {
@@ -42,7 +109,6 @@ button {
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
-  // border: red 1px solid;
 }
 
 .first {
@@ -58,34 +124,32 @@ button {
   flex-direction: column;
   flex-basis: 100%;
   flex: 6;
-  // border: red 1px solid;
 }
 
 .main-wrapper {
-  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.outer-border {
+.entire-calendar {
   display: flex;
   flex-direction: column;
   width: 300px;
-  border: $darkish-blue 1px solid;
+  border: $darkish-blue 2px solid;
   background-color: #ffffff;
   box-shadow: 0 0 32px 0 rgba(0, 53, 124, 0.25);
   border-radius: 4px;
+
+  position: absolute;
+  bottom: 0;
 }
 
 .current-year-month-wrapper {
   display: flex;
   align-items: center;
-  // justify-content: space-between;
-  // border: greenyellow 1px solid
   width: 100%;
-  // margin: 10px 0;
 }
 
 .current-year-month {
@@ -96,17 +160,12 @@ button {
   margin: 10px;
 }
 
-.right-side-arrow, .left-side-arrow {
+.right-side-arrow,
+.left-side-arrow {
   cursor: pointer;
-  padding: 12px;
+  padding: 15px 10px;
   display: flex;
   align-self: center;
-}
-
-.weeks-wrapper {
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: space-between;
 }
 
 .weeks-header-wrapper {
@@ -120,11 +179,6 @@ button {
   margin: 10px 0;
   color: $darkish-blue;
   font-weight: 600;
-}
-
-.cell-with-day {
-  padding: 10px;
-  border-radius: 100%;
 }
 
 .day-cells {
@@ -143,20 +197,17 @@ table {
   padding: 0;
 }
 
-th, td {
+th,
+td {
   width: 14.2857142857%;
   height: 42px;
   border-spacing: 0;
+  padding: 10px;
 }
 
 td:hover {
-  width: 15px;
-  height: 15px;
   background-color: $very-light-blue;
-}
-
-.test-border {
-  border: greenyellow 1px solid;
+  border-radius: 100%;
 }
 
 .today-marker {
@@ -164,9 +215,11 @@ td:hover {
 }
 
 .selected-day {
-  background-color: plum;
-  width: 32px;
-  height: 32px;
   background-color: $bright-blue;
   color: white;
+  border-radius: 100%;
+}
+
+.test-border {
+  border: greenyellow 1px solid;
 }

@@ -3,6 +3,7 @@ import moment from 'moment'
 
 import previous from './assets/Previous.svg'
 import next from './assets/Next.svg'
+import arrows from './assets/Up-down.svg'
 
 class App extends React.Component {
   state = {
@@ -10,7 +11,9 @@ class App extends React.Component {
     daysInMonth: null,
     months: moment.months(),
     daysArray: [],
-    selectedDateMomentFormat: ''
+    selectedDateMomentFormat: '',
+    formPlaceholder: 'Please select',
+    showCalendar: false
   }
 
   componentDidMount () {
@@ -46,18 +49,30 @@ class App extends React.Component {
 
   // creating correct date format from the event target when clicking on a cell
   selectDay = e => {
+    console.log('click')
     const number = parseInt(e.target.innerHTML)
     const event = e.target.innerHTML
     const formatted = `${event}/${moment(this.state.currentDate).format(
       'MM/YYYY'
     )}`
-    this.setState({ selectedDay: formatted, selectedElement: number })
+    this.setState({
+      selectedDay: formatted,
+      selectedElement: number,
+      formPlaceholder: formatted,
+      showCalendar: false
+    })
+  }
+
+  handleShowCalendar = e => {
+    console.log(e.target)
+    this.setState({ showCalendar: true })
   }
 
   render () {
     if (!this.state.currentDate) return null
-    console.log(this.state.currentDate)
-    
+
+    console.log(this.state.showCalendar)
+
     const displayDate = this.state.currentDate._d.toString()
     const slicedYear = displayDate.slice(10, 15)
     // const slicedMonth = displayDate.slice(3, 8)
@@ -135,54 +150,85 @@ class App extends React.Component {
     return (
       <>
         <div className='main-wrapper'>
-          <div className='outer-border'>
-            <div className='row'>
-              <div className='current-year-month-wrapper'>
-
-                <div className='column first'>
-                  <input
-                    type='image'
-                    src={previous}
-                    alt='back arrow'
-                    className='left-side-arrow'
-                    onClick={this.handleClickArrow}
-                    value='subtract'
-                  />
-                </div>
-
-                <div className='column2'>
-                  <h1 className='current-year-month'>
-                    {fullMonth} {slicedYear}
-                  </h1>
-                </div>
-
-                <div className='column second'>
-                  <input
-                    type='image'
-                    src={next}
-                    alt='next arrow'
-                    className='right-side-arrow'
-                    onClick={this.handleClickArrow}
-                    value='add'
-                  />
-                </div>
-
-              </div>
+          <div className='main-input-wrapper'>
+            <div className='text-wrapper'>
+              <h1 className='main-header'>
+                Have you sold subject to contract?
+              </h1>
+              <p className='subheader'>
+                Enter your exchange date to unlock the tools you need for the
+                next stage of your sale.
+              </p>
             </div>
 
-            <table className='weeks-wrapper'>
-              <tbody>
-                <tr className='weeks-header-wrapper'>
-                  {moment.weekdaysMin(true).map(day => (
-                    <th key={day} className='weeks'>
-                      {day}
-                    </th>
-                  ))}
-                </tr>
-              </tbody>
-              <tbody>{dayCells2}</tbody>
-            </table>
+            <div
+              className='select-submit-wrapper'
+              onClick={this.handleShowCalendar}
+            >
+              <div className='selection-box'>
+                <p className='placeholder'>{this.state.formPlaceholder}</p>
+
+                <div className='up-down-arrow-wrapper'>
+                  <input
+                    className='up-down-arrow'
+                    type='image'
+                    src={arrows}
+                    alt='up down arrors'
+                  />
+                </div>
+              </div>
+              <button className='submit-button'>Submit</button>
+            </div>
           </div>
+
+          {this.state.showCalendar && 
+            <div className='entire-calendar'>
+              <div className='row'>
+                <div className='current-year-month-wrapper'>
+                  <div className='column first'>
+                    <input
+                      type='image'
+                      src={previous}
+                      alt='back arrow'
+                      className='left-side-arrow'
+                      onClick={this.handleClickArrow}
+                      value='subtract'
+                    />
+                  </div>
+
+                  <div className='column2'>
+                    <h1 className='current-year-month'>
+                      {fullMonth} {slicedYear}
+                    </h1>
+                  </div>
+
+                  <div className='column second'>
+                    <input
+                      type='image'
+                      src={next}
+                      alt='next arrow'
+                      className='right-side-arrow'
+                      onClick={this.handleClickArrow}
+                      value='add'
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <table className='weeks-wrapper'>
+                <tbody>
+                  <tr className='weeks-header-wrapper'>
+                    {moment.weekdaysMin(true).map(day => (
+                      <th key={day} className='weeks'>
+                        {day}
+                      </th>
+                    ))}
+                  </tr>
+                </tbody>
+                <tbody>{dayCells2}</tbody>
+              </table>
+            </div>
+          }
         </div>
       </>
     )
