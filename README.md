@@ -9,7 +9,7 @@ To show the calendar widget click the form or up/down arrows. Use the left/arrow
 # What went well:
 I haven't worked with Moment.js before so it was really fun learning about that and building something I have never built before from scratch!
 
-# What I would change with more time:
+# What I would add in the future / with more time:
 I would like to fully test the app and improve the mobile version
 
 
