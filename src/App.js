@@ -61,7 +61,7 @@ class App extends React.Component {
     const slicedYear = displayDate.slice(10, 15)
     const slicedMonth = displayDate.slice(3, 8)
 
-    // 
+    //
     const daysIntoMonth = parseInt(
       moment(this.state.currentDate)
         .startOf('month')
@@ -89,20 +89,21 @@ class App extends React.Component {
             {i}
           </td>
         )
+      } else {
+        dayCells.push(
+          <td
+            key={i}
+            className={
+              this.state.selectedElement === i
+                ? 'selected-day cell-with-day'
+                : 'cell-with-day'
+            }
+            onClick={this.selectDay}
+          >
+            {i}
+          </td>
+        )
       }
-      dayCells.push(
-        <td
-          key={i}
-          className={
-            this.state.selectedElement === i
-              ? 'selected-day cell-with-day'
-              : 'cell-with-day'
-          }
-          onClick={this.selectDay}
-        >
-          {i}
-        </td>
-      )
     }
 
     const blanksAndCells = [...blankCells, ...dayCells]
@@ -134,10 +135,8 @@ class App extends React.Component {
       <>
         <div className='main-wrapper'>
           <div className='outer-border'>
-
             <div className='row'>
               <div className='current-year-month-wrapper'>
-
                 <button
                   className='left-side-arrow column back-arrow'
                   onClick={this.handleClickArrow}
@@ -151,7 +150,7 @@ class App extends React.Component {
                   />
                 </button>
 
-                <div className='column'>
+                <div className='column2'>
                   <h1 className='current-year-month'>
                     {slicedMonth} {slicedYear}
                   </h1>
