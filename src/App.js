@@ -1,6 +1,8 @@
 import React from 'react'
 import moment from 'moment'
-
+// importing this package to close calendar when user clicks away from element 
+import ClickOutHandler from 'react-onclickout'
+// importing images 
 import previous from './assets/Previous.svg'
 import next from './assets/Next.svg'
 import arrows from './assets/Up-down.svg'
@@ -19,6 +21,7 @@ class App extends React.Component {
   componentDidMount () {
     const currentDate = moment()
     const daysInMonth = parseInt(moment(currentDate).daysInMonth())
+    // creating an array of the days in current month
     const daysArray = []
     for (let i = 1; i <= daysInMonth; i++) {
       daysArray.push(i)
@@ -49,7 +52,6 @@ class App extends React.Component {
 
   // creating correct date format from the event target when clicking on a cell
   selectDay = e => {
-    console.log('click')
     const number = parseInt(e.target.innerHTML)
     const event = e.target.innerHTML
     const formatted = `${event}/${moment(this.state.currentDate).format(
@@ -63,27 +65,32 @@ class App extends React.Component {
     })
   }
 
-  handleShowCalendar = e => {
-    console.log(e.target)
+  // opening calendar modal
+  handleShowCalendar = () => {
     this.setState({ showCalendar: true })
+  }
+
+  // closing calendar modal
+  onClickOut = () => {
+    this.setState({ showCalendar: false })
   }
 
   render () {
     if (!this.state.currentDate) return null
 
-    console.log(this.state.showCalendar)
-
+    //taking current date and creating a string to display at top of calendar
     const displayDate = this.state.currentDate._d.toString()
     const slicedYear = displayDate.slice(10, 15)
-    // const slicedMonth = displayDate.slice(3, 8)
     const fullMonth = moment(displayDate).format('MMMM')
 
+    // finding what day of the week the current month starts on (in numbers)
     const daysIntoMonth = parseInt(
       moment(this.state.currentDate)
         .startOf('month')
         .format('d')
     )
 
+    // creating an array of 'table data' elements for the 'blank' days before the month starts
     const blankCells = []
     for (let i = 0; i < daysIntoMonth; i++) {
       blankCells.push(
@@ -93,6 +100,7 @@ class App extends React.Component {
       )
     }
 
+    // creating an array of 'table data' elements for all the days of the month -- also checking for the current day and adding an extra classname 
     const dayCells = []
     for (let i = 1; i <= this.state.daysInMonth; i++) {
       if (i === parseInt(moment().format('D'))) {
@@ -122,10 +130,12 @@ class App extends React.Component {
       }
     }
 
+    // spreading the blank cells and the day cells into 1 big array ready to create the calendar
     const blanksAndCells = [...blankCells, ...dayCells]
     const rows = []
     let cells = []
 
+    // looping through the array and creating rows of 7 cells then pushing this into the rows array
     blanksAndCells.forEach((row, i) => {
       if (i % 7 !== 0) {
         cells.push(row)
@@ -139,6 +149,7 @@ class App extends React.Component {
       }
     })
 
+    // creating html 'table row' elements for each row
     const dayCells2 = rows.map(row => {
       return (
         <tr key={Math.random()} className='day-cells'>
@@ -161,11 +172,8 @@ class App extends React.Component {
               </p>
             </div>
 
-            <div
-              className='select-submit-wrapper'
-              onClick={this.handleShowCalendar}
-            >
-              <div className='selection-box'>
+            <div className='select-submit-wrapper'>
+              <div className='selection-box' onClick={this.handleShowCalendar}>
                 <p className='placeholder'>{this.state.formPlaceholder}</p>
 
                 <div className='up-down-arrow-wrapper'>
@@ -181,54 +189,56 @@ class App extends React.Component {
             </div>
           </div>
 
-          {this.state.showCalendar && 
-            <div className='entire-calendar'>
-              <div className='row'>
-                <div className='current-year-month-wrapper'>
-                  <div className='column first'>
-                    <input
-                      type='image'
-                      src={previous}
-                      alt='back arrow'
-                      className='left-side-arrow'
-                      onClick={this.handleClickArrow}
-                      value='subtract'
-                    />
-                  </div>
+          {this.state.showCalendar && (
+            <ClickOutHandler onClickOut={this.onClickOut}>
+              <div className='entire-calendar'>
+                <div className='row'>
+                  <div className='current-year-month-wrapper'>
+                    <div className='column first'>
+                      <input
+                        type='image'
+                        src={previous}
+                        alt='back arrow'
+                        className='left-side-arrow'
+                        onClick={this.handleClickArrow}
+                        value='subtract'
+                      />
+                    </div>
 
-                  <div className='column2'>
-                    <h1 className='current-year-month'>
-                      {fullMonth} {slicedYear}
-                    </h1>
-                  </div>
+                    <div className='column2'>
+                      <h1 className='current-year-month'>
+                        {fullMonth} {slicedYear}
+                      </h1>
+                    </div>
 
-                  <div className='column second'>
-                    <input
-                      type='image'
-                      src={next}
-                      alt='next arrow'
-                      className='right-side-arrow'
-                      onClick={this.handleClickArrow}
-                      value='add'
-                    />
+                    <div className='column second'>
+                      <input
+                        type='image'
+                        src={next}
+                        alt='next arrow'
+                        className='right-side-arrow'
+                        onClick={this.handleClickArrow}
+                        value='add'
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <table className='weeks-wrapper'>
-                <tbody>
-                  <tr className='weeks-header-wrapper'>
-                    {moment.weekdaysMin(true).map(day => (
-                      <th key={day} className='weeks'>
-                        {day}
-                      </th>
-                    ))}
-                  </tr>
-                </tbody>
-                <tbody>{dayCells2}</tbody>
-              </table>
-            </div>
-          }
+                <table className='weeks-wrapper'>
+                  <tbody>
+                    <tr className='weeks-header-wrapper'>
+                      {moment.weekdaysMin(true).map(day => (
+                        <th key={day} className='weeks'>
+                          {day}
+                        </th>
+                      ))}
+                    </tr>
+                  </tbody>
+                  <tbody>{dayCells2}</tbody>
+                </table>
+              </div>
+            </ClickOutHandler>
+          )}
         </div>
       </>
     )
