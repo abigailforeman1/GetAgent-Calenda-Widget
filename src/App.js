@@ -61,7 +61,6 @@ class App extends React.Component {
     const slicedYear = displayDate.slice(10, 15)
     const slicedMonth = displayDate.slice(3, 8)
 
-    //
     const daysIntoMonth = parseInt(
       moment(this.state.currentDate)
         .startOf('month')
@@ -137,6 +136,7 @@ class App extends React.Component {
           <div className='outer-border'>
             <div className='row'>
               <div className='current-year-month-wrapper'>
+
                 <div className='button-wrapper column first'>
                   <input
                     type='image'
@@ -146,13 +146,6 @@ class App extends React.Component {
                     onClick={this.handleClickArrow}
                     value='subtract'
                   />
-
-                  {/* <img
-                      className='back-arrow'
-                      src={previous}
-                      alt='back arrow'
-                      value='subtract'
-                    /> */}
                 </div>
 
                 <div className='column2'>
@@ -170,23 +163,10 @@ class App extends React.Component {
                     onClick={this.handleClickArrow}
                     value='add'
                   />
-                  {/* <img
-                      className='next-arrow'
-                      src={next}
-                      alt='next arrow'
-                      value='add'
-                    /> */}
                 </div>
+
               </div>
             </div>
-
-            {/* <div className='weeks-wrapper row'>
-              {moment.weekdaysShort(true).map(day => (
-                <div key={day} className='column'>
-                  <h1 className='weeks'>{day}</h1>
-                </div>
-              ))}
-            </div> */}
 
             <table className='weeks-wrapper'>
               <tbody>
