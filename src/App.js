@@ -19,7 +19,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    const currentDate = moment()
+    const currentDate = moment.utc()
     const daysInMonth = parseInt(moment(currentDate).daysInMonth())
     // creating an array of the days in current month
     const daysArray = []
@@ -40,7 +40,6 @@ class App extends React.Component {
 
   // uses prop sent to function to determine whether adding or subtracting a month, sets new month and days in month to state
   handleClickArrow = e => {
-    console.log(e.target.value)
     const newMonth =
       e.target.value === 'add'
         ? this.state.currentDate.add(1, 'month')
@@ -197,7 +196,7 @@ class App extends React.Component {
                     <div className='entire-calendar'>
                       <div className='row'>
                         <div className='current-year-month-wrapper'>
-                          <div className='column first'>
+                          <div className='column-first'>
                             <input
                               type='image'
                               src={previous}
@@ -208,13 +207,13 @@ class App extends React.Component {
                             />
                           </div>
 
-                          <div className='column2'>
+                          <div className='column-middle'>
                             <h1 className='current-year-month'>
                               {fullMonth} {slicedYear}
                             </h1>
                           </div>
 
-                          <div className='column second'>
+                          <div className='column-second'>
                             <input
                               type='image'
                               src={next}
@@ -227,7 +226,7 @@ class App extends React.Component {
                         </div>
                       </div>
 
-                      <table className='weeks-wrapper'>
+                      <table>
                         <tbody>
                           <tr className='weeks-header-wrapper'>
                             {moment.weekdaysMin(true).map(day => (
@@ -237,6 +236,8 @@ class App extends React.Component {
                             ))}
                           </tr>
                         </tbody>
+
+
                         <tbody>{dayCells2}</tbody>
                       </table>
                     </div>
