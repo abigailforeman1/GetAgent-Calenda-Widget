@@ -56,10 +56,12 @@ class App extends React.Component {
 
   render () {
     if (!this.state.currentDate) return null
-
+    console.log(this.state.currentDate)
+    
     const displayDate = this.state.currentDate._d.toString()
     const slicedYear = displayDate.slice(10, 15)
-    const slicedMonth = displayDate.slice(3, 8)
+    // const slicedMonth = displayDate.slice(3, 8)
+    const fullMonth = moment(displayDate).format('MMMM')
 
     const daysIntoMonth = parseInt(
       moment(this.state.currentDate)
@@ -137,12 +139,12 @@ class App extends React.Component {
             <div className='row'>
               <div className='current-year-month-wrapper'>
 
-                <div className='button-wrapper column first'>
+                <div className='column first'>
                   <input
                     type='image'
                     src={previous}
                     alt='back arrow'
-                    className='left-side-arrow back-arrow'
+                    className='left-side-arrow'
                     onClick={this.handleClickArrow}
                     value='subtract'
                   />
@@ -150,16 +152,16 @@ class App extends React.Component {
 
                 <div className='column2'>
                   <h1 className='current-year-month'>
-                    {slicedMonth} {slicedYear}
+                    {fullMonth} {slicedYear}
                   </h1>
                 </div>
 
-                <div className='button-wrapper column second'>
+                <div className='column second'>
                   <input
                     type='image'
                     src={next}
                     alt='next arrow'
-                    className='right-side-arrow next-arrow'
+                    className='right-side-arrow'
                     onClick={this.handleClickArrow}
                     value='add'
                   />
@@ -171,7 +173,7 @@ class App extends React.Component {
             <table className='weeks-wrapper'>
               <tbody>
                 <tr className='weeks-header-wrapper'>
-                  {moment.weekdaysShort(true).map(day => (
+                  {moment.weekdaysMin(true).map(day => (
                     <th key={day} className='weeks'>
                       {day}
                     </th>

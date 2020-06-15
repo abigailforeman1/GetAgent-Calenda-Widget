@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 $darkish-blue: rgb(0, 53, 124);
-$bright-blue: #006cfa;
-$very-light-blue: #d9e9fe;
+$bright-blue: rgb(0, 108, 250);
+$very-light-blue: rgb(215, 232, 254);
 
 * {
   box-sizing: border-box;
@@ -33,7 +33,7 @@ button {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  border-bottom: 1px solid rgba(0, 53, 124, 0.25);
+  border-bottom: 1px solid $very-light-blue;
   // border: red 1px solid;
 }
 
@@ -46,11 +46,11 @@ button {
 }
 
 .first {
-  border-right: 1px solid rgba(0, 53, 124, 0.25);
+  border-right: 1px solid $very-light-blue;
 }
 
 .second {
-  border-left: 1px solid rgba(0, 53, 124, 0.25);
+  border-left: 1px solid $very-light-blue;
 }
 
 .column2 {
@@ -96,16 +96,6 @@ button {
   margin: 10px;
 }
 
-.button-wrapper {
-  // border: red 1px solid;
-
-}
-
-.back-arrow {
-  // justify-content: flex-start;
-  // background-image: url('./assets/Previous.svg')
-}
-
 .right-side-arrow, .left-side-arrow {
   cursor: pointer;
   padding: 12px;
@@ -113,19 +103,14 @@ button {
   align-self: center;
 }
 
-.next-arrow {  
-  // align-self: flex-end;
-}
-
 .weeks-wrapper {
   // display: flex;
   // flex-direction: column;
   // justify-content: space-between;
-  
 }
 
 .weeks-header-wrapper {
-  border-bottom: 1px solid rgba(0, 53, 124, 0.25);
+  border-bottom: 1px solid $very-light-blue;
 }
 
 .weeks {
@@ -140,14 +125,13 @@ button {
 .cell-with-day {
   padding: 10px;
   border-radius: 100%;
-
 }
 
 .day-cells {
   text-align: center;
   font-size: 10px;
   color: $darkish-blue;
-  border-bottom: 1px solid rgba(0, 53, 124, 0.25);
+  border-bottom: 1px solid $very-light-blue;
 }
 
 table {
