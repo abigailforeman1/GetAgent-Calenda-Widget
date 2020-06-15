@@ -31,6 +31,12 @@ input {
   border: none;
 }
 
+@media only screen and (max-width: 530px) {
+  .main-input-wrapper, .main-wrapper {
+    flex-direction: column;
+  }
+}
+
 .main-wrapper {
   height: 100vh;
   display: flex;
