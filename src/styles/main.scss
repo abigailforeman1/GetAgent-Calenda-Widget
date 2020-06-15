@@ -31,8 +31,6 @@ input {
   border: none;
 }
 
-// styling for main input section of page
-
 .main-wrapper {
   height: 100vh;
   display: flex;
@@ -214,6 +212,7 @@ input {
               #today-marker {
                 font-weight: 900;
               }
+
               .selected-day {
                 background-color: $bright-blue;
                 color: white;

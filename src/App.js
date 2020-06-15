@@ -2,9 +2,9 @@ import React from 'react'
 import moment from 'moment'
 // importing this package to close calendar when user clicks away from element
 import ClickOutHandler from 'react-onclickout'
+//importing Calendar 
+import Calendar from './components/Calendar'
 // importing images
-import previous from './assets/Previous.svg'
-import next from './assets/Next.svg'
 import arrows from './assets/Up-down.svg'
 
 class App extends React.Component {
@@ -189,58 +189,18 @@ class App extends React.Component {
                   />
                 </div>
               </div>
+
               <button className='submit-button'>Submit</button>
+
               <div className='extra-div'>
                 {this.state.showCalendar && (
                   <ClickOutHandler onClickOut={this.onClickOut}>
-                    <div className='entire-calendar'>
-                      <div className='row'>
-                        <div className='current-year-month-wrapper'>
-                          <div className='column-first'>
-                            <input
-                              type='image'
-                              src={previous}
-                              alt='back arrow'
-                              className='left-side-arrow'
-                              onClick={this.handleClickArrow}
-                              value='subtract'
-                            />
-                          </div>
-
-                          <div className='column-middle'>
-                            <h1 className='current-year-month'>
-                              {fullMonth} {slicedYear}
-                            </h1>
-                          </div>
-
-                          <div className='column-second'>
-                            <input
-                              type='image'
-                              src={next}
-                              alt='next arrow'
-                              className='right-side-arrow'
-                              onClick={this.handleClickArrow}
-                              value='add'
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      <table>
-                        <tbody>
-                          <tr className='weeks-header-wrapper'>
-                            {moment.weekdaysMin(true).map(day => (
-                              <th key={day} className='weeks'>
-                                {day}
-                              </th>
-                            ))}
-                          </tr>
-                        </tbody>
-
-
-                        <tbody>{dayCells2}</tbody>
-                      </table>
-                    </div>
+                    <Calendar
+                      handleClickArrow={this.handleClickArrow}
+                      fullMonth={fullMonth}
+                      slicedYear={slicedYear}
+                      dayCells2={dayCells2}
+                    />
                   </ClickOutHandler>
                 )}
               </div>
