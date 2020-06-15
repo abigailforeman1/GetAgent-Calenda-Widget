@@ -1,8 +1,8 @@
 import React from 'react'
 import moment from 'moment'
-// importing this package to close calendar when user clicks away from element 
+// importing this package to close calendar when user clicks away from element
 import ClickOutHandler from 'react-onclickout'
-// importing images 
+// importing images
 import previous from './assets/Previous.svg'
 import next from './assets/Next.svg'
 import arrows from './assets/Up-down.svg'
@@ -100,14 +100,19 @@ class App extends React.Component {
       )
     }
 
-    // creating an array of 'table data' elements for all the days of the month -- also checking for the current day and adding an extra classname 
+    // creating an array of 'table data' elements for all the days of the month -- also checking for the current day and adding an extra classname
     const dayCells = []
     for (let i = 1; i <= this.state.daysInMonth; i++) {
       if (i === parseInt(moment().format('D'))) {
         dayCells.push(
           <td
             key={i}
-            className='cell-with-day today-marker'
+            className={
+              this.state.selectedElement === i
+                ? 'selected-day cell-with-day'
+                : 'cell-with-day'
+            }
+            id='today-marker'
             onClick={this.selectDay}
           >
             {i}
@@ -186,59 +191,60 @@ class App extends React.Component {
                 </div>
               </div>
               <button className='submit-button'>Submit</button>
+              <div className='extra-div'>
+                {this.state.showCalendar && (
+                  <ClickOutHandler onClickOut={this.onClickOut}>
+                    <div className='entire-calendar'>
+                      <div className='row'>
+                        <div className='current-year-month-wrapper'>
+                          <div className='column first'>
+                            <input
+                              type='image'
+                              src={previous}
+                              alt='back arrow'
+                              className='left-side-arrow'
+                              onClick={this.handleClickArrow}
+                              value='subtract'
+                            />
+                          </div>
+
+                          <div className='column2'>
+                            <h1 className='current-year-month'>
+                              {fullMonth} {slicedYear}
+                            </h1>
+                          </div>
+
+                          <div className='column second'>
+                            <input
+                              type='image'
+                              src={next}
+                              alt='next arrow'
+                              className='right-side-arrow'
+                              onClick={this.handleClickArrow}
+                              value='add'
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <table className='weeks-wrapper'>
+                        <tbody>
+                          <tr className='weeks-header-wrapper'>
+                            {moment.weekdaysMin(true).map(day => (
+                              <th key={day} className='weeks'>
+                                {day}
+                              </th>
+                            ))}
+                          </tr>
+                        </tbody>
+                        <tbody>{dayCells2}</tbody>
+                      </table>
+                    </div>
+                  </ClickOutHandler>
+                )}
+              </div>
             </div>
           </div>
-
-          {this.state.showCalendar && (
-            <ClickOutHandler onClickOut={this.onClickOut}>
-              <div className='entire-calendar'>
-                <div className='row'>
-                  <div className='current-year-month-wrapper'>
-                    <div className='column first'>
-                      <input
-                        type='image'
-                        src={previous}
-                        alt='back arrow'
-                        className='left-side-arrow'
-                        onClick={this.handleClickArrow}
-                        value='subtract'
-                      />
-                    </div>
-
-                    <div className='column2'>
-                      <h1 className='current-year-month'>
-                        {fullMonth} {slicedYear}
-                      </h1>
-                    </div>
-
-                    <div className='column second'>
-                      <input
-                        type='image'
-                        src={next}
-                        alt='next arrow'
-                        className='right-side-arrow'
-                        onClick={this.handleClickArrow}
-                        value='add'
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <table className='weeks-wrapper'>
-                  <tbody>
-                    <tr className='weeks-header-wrapper'>
-                      {moment.weekdaysMin(true).map(day => (
-                        <th key={day} className='weeks'>
-                          {day}
-                        </th>
-                      ))}
-                    </tr>
-                  </tbody>
-                  <tbody>{dayCells2}</tbody>
-                </table>
-              </div>
-            </ClickOutHandler>
-          )}
         </div>
       </>
     )

@@ -3,7 +3,7 @@
 $darkish-blue: rgb(0, 53, 124);
 $bright-blue: rgb(0, 108, 250);
 $very-light-blue: rgb(215, 232, 254);
-$powder-blue: #bfdafd;
+$powder-blue: rgb(191, 218, 253);
 
 * {
   box-sizing: border-box;
@@ -59,32 +59,35 @@ input {
   font-size: 12px;
   padding: 8px 60px 8px 10px;
   align-self: center;
-
 }
 
 .up-down-arrow {
   padding: 12px 15px;
-  display: flex;
-  align-self: center;
 }
 
 .up-down-arrow-wrapper {
   border-left: $darkish-blue 2px solid;
   background-color: $powder-blue;
+  display: flex;
 }
 
 .select-submit-wrapper {
   display: flex;
   align-self: center;
-  margin: 20px 60px 20px 20px;
+  margin: 20px;
+  flex-wrap: wrap;
 }
 
-.selection-box  {
+.extra-div {
+  flex-basis: 100%;
+  position: relative;
+}
+
+.selection-box {
   display: flex;
   border: $darkish-blue 2px solid;
   border-radius: 4px;
-  margin: 6px;
-
+  margin: 0 10px 0 0;
 }
 
 .submit-button {
@@ -93,7 +96,7 @@ input {
   color: white;
   font-size: 12px;
   padding: 10px 20px;
-  margin: 6px;
+  margin: 6px 6px 6px 0;
 }
 
 .row {
@@ -141,9 +144,8 @@ input {
   background-color: #ffffff;
   box-shadow: 0 0 32px 0 rgba(0, 53, 124, 0.25);
   border-radius: 4px;
-
   position: absolute;
-  bottom: 0;
+  align-self: flex-start;
 }
 
 .current-year-month-wrapper {
@@ -195,22 +197,22 @@ table {
   border-collapse: collapse;
   margin: 0;
   padding: 0;
+
+  th,
+  td {
+    width: 14.2857142857%;
+    height: 42px;
+    border-spacing: 0;
+    padding: 10px;
+  }
+
+  td:hover {
+    background-color: $very-light-blue;
+    border-radius: 100%;
+  }
 }
 
-th,
-td {
-  width: 14.2857142857%;
-  height: 42px;
-  border-spacing: 0;
-  padding: 10px;
-}
-
-td:hover {
-  background-color: $very-light-blue;
-  border-radius: 100%;
-}
-
-.today-marker {
+#today-marker {
   font-weight: 900;
 }
 
@@ -220,6 +222,6 @@ td:hover {
   border-radius: 100%;
 }
 
-.test-border {
-  border: greenyellow 1px solid;
-}
+// .test-border {
+//   border: greenyellow 1px solid;
+// }
